@@ -1,4 +1,4 @@
-# Modified comment from develop branch
+// Modified comment from develop branch
 const bestSum = (s, ns, memo = {}) => {
     console.log(">> Start bestSum("+s+")...");
 
