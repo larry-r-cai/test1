@@ -31,7 +31,7 @@ const canConstruct = (targetString, stringArray, memo={})=>{
         let allChildNodesTrue = true;
         for(let str of subStr){//Return true when all splited nodes are true
             if(str.length > 0 && !canConstruct(str, stringArray, memo)){
-                console.log("Child node "+str+" can Not be constructed.");
+                console.log("Child node "+str+" of parent node "+targetString+" can Not be constructed.");
                 allChildNodesTrue = false;
                 break;
             }
@@ -46,4 +46,4 @@ const canConstruct = (targetString, stringArray, memo={})=>{
 }
 
 //console.log(canConstruct("Test", ['T','es','s','t']));
-console.log(canConstruct("Testese", ['T','e','es','t']));
+console.log(canConstruct("Testesestesst", ['T','e','es','t']));
