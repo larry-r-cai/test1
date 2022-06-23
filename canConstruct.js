@@ -31,12 +31,15 @@ const canConstruct = (targetString, stringArray, memo={})=>{
         let allChildNodesTrue = true;
         for(let str of subStr){//Return true when all splited nodes are true
             if(str.length > 0 && !canConstruct(str, stringArray, memo)){
-                //console.log("Here returning true: str="+str);
+                console.log("Child node "+str+" can Not be constructed.");
                 allChildNodesTrue = false;
                 break;
             }
         }
-        if(allChildNodesTrue){ memo[targetString] = true; return true;}
+        if(allChildNodesTrue){ 
+            console.log("Node "+targetString+" can be constructed.");
+            memo[targetString] = true; 
+            return true;}
     }
     memo[targetString] = false;
     return false;
