@@ -1,7 +1,13 @@
-const canConstruct = (targetString, stringArray)=>{
+const canConstruct = (targetString, stringArray, memo={})=>{
     console.log("targetString="+targetString);
+    if(targetString in memo){
+        console.log("Found cached value = "+targetString+":"+memo[targetString]);
+        return memo[targetString];
+    } 
+
     if(stringArray.includes(targetString)){
-        console.log("Returning true, targetString="+targetString);
+        //console.log("Returning true, targetString="+targetString);
+        memo[targetString] = true;
         return true;
     }
     let containsAnyString = false;
@@ -10,27 +16,31 @@ const canConstruct = (targetString, stringArray)=>{
             containsAnyString = true;
         };
     }
-    if(!containsAnyString) return false;
+    if(!containsAnyString){
+        memo[targetString] = false;
+        return false;
+    } 
     //console.log("Not a base case");
     let result = false;
     for(let str of stringArray){
         const subStr = targetString.split(str);
-        console.log("str="+str+", subStr="+subStr);
+        console.log("edge="+str+", childNodes="+subStr);
         if(subStr.length == 1){//Can't split
              continue;//Move to next string
         }
         let allChildNodesTrue = true;
         for(let str of subStr){//Return true when all splited nodes are true
-            if(str.length > 0 && !canConstruct(str, stringArray)){
+            if(str.length > 0 && !canConstruct(str, stringArray, memo)){
                 //console.log("Here returning true: str="+str);
                 allChildNodesTrue = false;
                 break;
             }
         }
-        if(allChildNodesTrue) return true;
+        if(allChildNodesTrue){ memo[targetString] = true; return true;}
     }
+    memo[targetString] = false;
     return false;
 }
 
 //console.log(canConstruct("Test", ['T','es','s','t']));
-console.log(canConstruct("Test", ['T','e','es','t']));
+console.log(canConstruct("Testese", ['T','e','es','t']));
