@@ -46,4 +46,5 @@ const canConstruct = (targetString, stringArray, memo={})=>{
 }
 
 //console.log(canConstruct("Test", ['T','es','s','t']));
-console.log(canConstruct("Testesestesst", ['T','e','es','t']));
+//console.log(canConstruct("Testesestesst", ['T','e','es','t']));
+console.log(canConstruct("Tesest", ['T', 'es', 's', 't']));
