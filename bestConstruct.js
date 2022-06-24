@@ -1,8 +1,16 @@
-const bestConstruct = (targetString, stringArray)=>{
+const log = (arg)=>{
+    console.log(arg);
+}
+
+const bestConstruct = (targetString, stringArray, memo={})=>{
     console.log(">> Start targetString '"+targetString+"'");
     if(targetString.length == 0){
         console.log("<< End targetString '"+targetString+"' Returning []");
          return [];
+    }
+    if(targetString in memo){
+        log("Found cached value ["+memo[targetString]+"] for "+targetString);
+        return memo[targetString];
     }
     if(stringArray.includes(targetString)){
         //console.log("Returning true, targetString="+targetString);
@@ -19,6 +27,7 @@ const bestConstruct = (targetString, stringArray)=>{
     }
     if(!containsAnyString){
         console.log("<< End targetString '"+targetString+"' Returning null");
+        memo[targetString] = null;
        return null;
     } 
     //console.log("Not a base case");
@@ -34,7 +43,7 @@ const bestConstruct = (targetString, stringArray)=>{
         let resultArray = [];
         let isFirstLoop = true;
         for(let str of subStr){//Return true when all splited nodes are true
-            const result = bestConstruct(str, stringArray);
+            const result = bestConstruct(str, stringArray, memo);
             if(result == null){
                 console.log("Child node "+str+" of parent node "+targetString+" can Not be constructed.");
                 allChildNodesTrue = false;
@@ -67,7 +76,8 @@ const bestConstruct = (targetString, stringArray)=>{
         }
     }
     console.log("<< End targetString '"+targetString+"' Returning "+bestResultArray);
+    memo[targetString] = bestResultArray;
     return bestResultArray;
 }
 
-console.log(bestConstruct("Tesest", ['T', 'es', 't', 'eses']));
+console.log(bestConstruct("Tesestestest", ['T', 'es', 't', 'eses','est']));
