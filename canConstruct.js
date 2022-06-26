@@ -1,4 +1,27 @@
-const canConstruct = (targetString, stringArray, memo={})=>{
+const canConstruct = (targetString, stringArray, memo={}) => {
+    if(targetString === ''){
+        return true;
+    }
+    if(targetString in memo){
+        return memo[targetString];
+    }
+
+    for(let str of stringArray){
+        if(targetString.indexOf(str) === 0){
+            const remainder = targetString.slice(str.length);
+            if(canConstruct(remainder, stringArray, memo)){
+                memo[targetString] = true; 
+                return true;
+            }
+        }
+    }
+
+    memo[targetString] = false;
+    return false;
+
+}
+
+const canConstruct1 = (targetString, stringArray, memo={})=>{
     console.log("targetString="+targetString);
     if(targetString in memo){
         console.log("Found cached value = "+targetString+":"+memo[targetString]);
@@ -30,7 +53,7 @@ const canConstruct = (targetString, stringArray, memo={})=>{
         }
         let allChildNodesTrue = true;
         for(let str of subStr){//Return true when all splited nodes are true
-            if(str.length > 0 && !canConstruct(str, stringArray, memo)){
+            if(str.length > 0 && !canConstruct1(str, stringArray, memo)){
                 console.log("Child node "+str+" of parent node "+targetString+" can Not be constructed.");
                 allChildNodesTrue = false;
                 break;
@@ -47,4 +70,5 @@ const canConstruct = (targetString, stringArray, memo={})=>{
 
 //console.log(canConstruct("Test", ['T','es','s','t']));
 //console.log(canConstruct("Testesestesst", ['T','e','es','t']));
-console.log(canConstruct("Tesest", ['T', 'es', 's', 't']));
+console.log(canConstruct("Tesestesest", ['T', 'es', 's', 't']));
+console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeeef", ['e', 'ee', 'eeee', 'eeeeee']));
