@@ -20,4 +20,4 @@ const countConstruct = (targetString, stringArray, memo={}) => {
 }
 
 console.log(countConstruct("Tesestesest", ['T', 'es', 's', 't', 'Tesestesest']));
-console.log(countConstruct("aaaa", ['a', 'aa']));
+console.log(countConstruct("aaaaaaaaaaaaaaaaaaaa", ['a', 'aa']));
