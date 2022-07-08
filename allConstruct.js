@@ -11,12 +11,13 @@ const allConstruct = (targetString, stringArray, memo={}) => {
         if(targetString.indexOf(str) === 0){
             const remainder = targetString.slice(str.length);
             const arr = allConstruct(remainder, stringArray, memo);
-
-            if(arr.length > 0){
-                for(let arr1 of arr){
-                    result.push([str, ...arr1]);
-                }                    
-            }
+            const ways = arr.map(el=>[str, ...el]);
+            result.push([...ways]);
+            //if(arr.length > 0){
+                //for(let arr1 of arr){
+                //    result.push([str, ...arr1]);
+                //}
+            //}
         }
     }
 
